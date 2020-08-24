@@ -1,0 +1,134 @@
+@import "fonts";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(230, 230, 230);
+  margin: 0;
+  padding: 0;
+}
+
+.home {
+  font-weight: 300;
+  color: #fff;
+  background: #000;
+  text-align: center;
+  display: block;
+  width: 500px;
+  margin: 50px auto;
+  padding: 50px 50px;
+  border-radius: 5px;
+  letter-spacing: 0.05em;
+  word-wrap: break-word;
+}
+
+.navbarContainer {
+  background: rgb(14, 12, 51);
+  height: 60px;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+}
+.button:hover {
+  transition: 0.3s;
+  background: rgb(230, 230, 230);
+}
+.button {
+  width: 60px;
+  height: 60px;
+}
+.buttonClick {
+  width: 60px;
+  background: rgb(230, 230, 230);
+  height: 60px;
+}
+.buttonsConts {
+  display: flex;
+  justify-content: space-between;
+  width: 12%;
+}
+.personName{
+  color:white
+}
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 40%;
+  margin-left: 30vw;
+  height: 80vh;
+}
+.input {
+  height: 40px;
+  margin-top: -30px;
+  font-size: 20px;
+  text-align: center;
+}
+.warningInput {
+  height: 40px;
+  margin-top: -30px;
+  font-size: 20px;
+  text-align: center;
+  border: 2px solid red;
+}
+.submitButton {
+  height: 40px;
+  width: 90px;
+  background: rgb(14, 12, 51);
+  color: white;
+  font-size: 20px;
+  align-self: center;
+}
+.formSubtitles {
+  align-self: center;
+}
+.formTitle {
+  font-size: 40px;
+  align-self: center;
+}
+.welcomeTitle {
+  text-align: center;
+}
+.welcomeGif {
+  margin-left: 34%;
+  height: 70vh;
+}
+.secretContainer {
+  background-image: url("https://media2.giphy.com/media/uBYtzxxLHhxPq/source.gif");
+  background-repeat: no-repeat;
+  height: 90.4vh;
+  width: 100vw;
+  background-size: cover;
+}
+.secretTitle {
+  color: white;
+  font-size: 30px;
+  margin-left: 20%;
+  padding-top: 8%;
+}
+
+.footer {
+  background: rgb(14, 12, 51);
+  height: 50px;
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.footerContent {
+  display: inline;
+  margin-left: 20px;
+}
+.logo {
+  margin-left: 20px;
+}
+.forbidden{
+  font-size: 40px;
+  text-align: center;
+  margin-top: 20vh;
+}
