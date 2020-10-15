@@ -1,35 +1,19 @@
 import React, { useState } from "react";
-import { logIn } from "../../../store/actions";
-import { useDispatch } from "react-redux";
 
 export default (props) => {
-  const dispatch = useDispatch();
   const [form, formChange] = useState({
     username: "",
-    password: ""
+    password: "",
   });
   const [validPass, isValidPass] = useState(true);
   const [validName, isValidName] = useState(true);
   const [message, setMessage] = useState("");
-  const onChange = e => {
+  const onChange = (e) => {
     formChange({ ...form, [e.target.name]: e.target.value });
   };
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    form.password
-      ? isValidPass(true)
-      : (isValidPass(false), setMessage("Fill the blank"));
-    form.username
-      ? isValidName(true)
-      : (isValidName(false), setMessage("Fill the blank"));
-    form.username &&
-      form.password &&
-      (dispatch(logIn(form)).then(()=>props.history.push("/secret")).catch(() => {
-        setMessage("Invalid username or password");
-        isValidName(false);
-        isValidPass(false);
-      }),
-      setMessage(""));
+    // submit
   };
 
   return (

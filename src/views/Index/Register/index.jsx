@@ -1,48 +1,25 @@
 import React, { useState } from "react";
-import { registerUser } from "../../../store/actions";
-import { useDispatch } from "react-redux";
 
 export default (props) => {
-  const dispatch = useDispatch();
   const [form, formChange] = useState({
     username: "",
     password: "",
-    validatePassword: ""
+    validatePassword: "",
   });
   const [valid, areValid] = useState(true);
   const [validName, isValidName] = useState(true);
   const [message, setMessage] = useState("");
 
-  const onChange = e => {
+  const onChange = (e) => {
     formChange({
       ...form,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    form.password
-      ? form.password === form.validatePassword
-        ? areValid(true)
-        : (areValid(false), setMessage("Passwords do not match"))
-      : (areValid(false), setMessage("Fill the blank"));
-    form.username
-      ? isValidName(true)
-      : (isValidName(false), setMessage("Fill the blank"));
-    form.username &&
-      form.password &&
-      form.password === form.validatePassword &&
-      (dispatch(
-        registerUser({ username: form.username, password: form.password })
-      )
-        .then(() => props.history.push("/secret"))
-        .catch(() => {
-          setMessage("Something went wrong!");
-          isValidName(false);
-          areValid(false)
-        }),
-      setMessage(""));
+    // submit
   };
   return (
     <div className="registerContainer">

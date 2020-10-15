@@ -1,18 +1,15 @@
-import React, { lazy, useEffect } from "react";
+import React from "react";
 import { render } from "react-dom";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import "../public/stylesheets/scss/main.scss";
-import store from "../store";
+import { BrowserRouter as Router } from "react-router-dom";
+import "../public/stylesheets/main.css";
 import App from "./index.jsx";
-import { Provider } from "react-redux";
+
 const Root = () => {
   return (
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
+    <Router>
+      <App />
+    </Router>
   );
 };
 
-render(<Root />, document.getElementById("root"));
+export default render(<Root />, document.getElementById("root"));
