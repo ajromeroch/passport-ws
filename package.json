@@ -44,8 +44,8 @@
     "tailwindcss": "^1.9.4"
   },
   "scripts": {
-    "start": "nodemon app.js",
-    "dev": "concurrently \"webpack --mode development --devtool inline-source-map --watch\" \"nodemon app.js\"",
+    "start": "nodemon api/server.js",
+    "dev": "concurrently \"webpack --mode development --devtool inline-source-map --watch\" \"nodemon api/server.js\"",
     "build": "webpack --mode development --devtool inline-source-map --watch"
   }
 }

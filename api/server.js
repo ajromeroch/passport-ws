@@ -5,12 +5,12 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const app = express();
 
-const appConfig = require("./app.config.js");
+const config = require("./server.config.js");
 
 app.use(helmet());
 
 // Express Route File Requires
-const authAPI = require("./api/routes.js");
+const authAPI = require("./routes");
 
 app.use(express.static(path.resolve(__dirname, "src/public")));
 
@@ -23,4 +23,4 @@ app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "./src/public", "index.html"));
 });
 
-http.createServer(app).listen(appConfig.port);
+http.createServer(app).listen(config.port);
