@@ -12,8 +12,6 @@ app.use(helmet());
 // Express Route File Requires
 const authAPI = require("./api/routes.js");
 
-// <REQUIRES> DON'T CHANGE THIS LINE - Express route file requires will be added above here.
-
 app.use(express.static(path.resolve(__dirname, "src/public")));
 
 app.use(bodyParser.json());
@@ -26,4 +24,3 @@ app.get("/*", (req, res) => {
 });
 
 http.createServer(app).listen(appConfig.port);
-

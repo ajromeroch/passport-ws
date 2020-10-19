@@ -2,7 +2,7 @@ const path = require("path");
 
 const appConfig = require("./app.config.js");
 
-const REACT_DIRPATH = path.resolve(__dirname, "src/views");
+const REACT_DIRPATH = path.resolve(__dirname, "src");
 const BUILD_DIRPATH = path.resolve(__dirname, "src/public/javascripts/dist");
 
 module.exports = {
@@ -16,6 +16,9 @@ module.exports = {
     publicPath: "/javascripts/dist/",
     filename: "[name].bundle.js",
     chunkFilename: "[name].bundle.js",
+  },
+  resolve: {
+    extensions: [".js", ".jsx"],
   },
   optimization: {
     splitChunks: {
@@ -41,13 +44,14 @@ module.exports = {
             options: {
               presets: ["@babel/preset-env", "@babel/preset-react"],
               plugins: [
+                ["@babel/plugin-transform-async-to-generator"],
+                ["@babel/plugin-syntax-dynamic-import"],
                 [
-                  "@babel/plugin-proposal-class-properties",
+                  "@babel/plugin-transform-runtime",
                   {
-                    loose: true,
+                    regenerator: true,
                   },
                 ],
-                ["@babel/plugin-syntax-dynamic-import"],
               ],
             },
           },

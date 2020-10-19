@@ -1,28 +1,38 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+import axios from "axios";
 
-import Welcome from "./Index/Welcome.jsx";
-import NavBar from "./Index/NavBar/index.jsx";
-import Register from "./Index/Register/index.jsx";
-import Login from "./Index/Login/index.jsx";
-import Secret from "./Index/Secret/index.jsx";
+import Welcome from "./Welcome.jsx";
+import NavBar from "./Navbar.jsx";
+import Register from "./Register.jsx";
+import Login from "./Login.jsx";
+import Secret from "./Secret.jsx";
+import ForgotPassword from "./ForgotPassword.jsx";
+
+import { UserContext } from "../Root";
 
 export default () => {
-  const dispatch = useDispatch();
+  const { user, setUser } = useContext(UserContext);
+
   useEffect(() => {
-    dispatch(me());
+    axios.get("/api/me").then((user) => {
+      setUser(user);
+    });
   }, []);
-  const user = useSelector((state) => state.user);
+
   return (
-    <div>
+    <div className="h-screen">
       <NavBar />
-      <Switch>
-        <Route exact path="/" component={Welcome} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/private" component={Secret} />
-        <Redirect to="/" />
-      </Switch>
+      <div className="h-full flex justify-center items-center">
+        <Switch>
+          <Route exact path="/" component={Welcome} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/forgot-password" component={ForgotPassword} />
+          {user.id && <Route exact path="/secret" component={Secret} />}
+          <Redirect to="/" />
+        </Switch>
+      </div>
     </div>
   );
 };
