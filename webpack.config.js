@@ -1,6 +1,6 @@
 const path = require("path");
 
-const appConfig = require("./app.config.js");
+const serverConfig = require("./server.config.js");
 
 const REACT_DIRPATH = path.resolve(__dirname, "src");
 const BUILD_DIRPATH = path.resolve(__dirname, "src/public/javascripts/dist");
@@ -100,9 +100,5 @@ module.exports = {
         ],
       },
     ],
-  },
-  serve: {
-    port: appConfig.port,
-    content: BUILD_DIRPATH,
   },
 };
