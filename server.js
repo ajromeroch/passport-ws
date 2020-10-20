@@ -10,9 +10,9 @@ const config = require("./server.config.js");
 app.use(helmet());
 
 // Express Route File Requires
-const authAPI = require("./routes");
+const authAPI = require("./api/routes");
 
-app.use(express.static(path.resolve(__dirname, "src/public")));
+app.use(express.static(path.resolve(__dirname, "./src/public")));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -23,4 +23,6 @@ app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "./src/public", "index.html"));
 });
 
-http.createServer(app).listen(config.port);
+http.createServer(app).listen(config.port, () => {
+  console.log(`Server listening at port ${config.port}`);
+});

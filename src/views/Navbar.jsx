@@ -39,7 +39,7 @@ export default () => {
       setUser({});
       success("logged out");
       history.push("/");
-    } catch (err) {
+    } catch ({ response }) {
       error(response.status, response.statusText);
     }
   };

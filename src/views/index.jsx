@@ -10,14 +10,22 @@ import Secret from "./Secret.jsx";
 import ForgotPassword from "./ForgotPassword.jsx";
 
 import { UserContext } from "../Root";
+import { log, success, error } from "../utils/logs";
 
 export default () => {
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
   useEffect(() => {
-    axios.get("/api/me").then((user) => {
-      setUser(user);
-    });
+    log(`fetching user...`);
+    axios
+      .get("/api/me")
+      .then((user) => {
+        success(`found user ${user.mail}`);
+        setUser(user);
+      })
+      .catch(({ response }) => {
+        error(response.status, response.statusText);
+      });
   }, []);
 
   return (
@@ -29,7 +37,7 @@ export default () => {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/forgot-password" component={ForgotPassword} />
-          {user.id && <Route exact path="/secret" component={Secret} />}
+          <Route exact path="/secret" component={Secret} />
           <Redirect to="/" />
         </Switch>
       </div>
