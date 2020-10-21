@@ -1,7 +1,5 @@
 const path = require("path");
 
-const serverConfig = require("./server.config.js");
-
 const REACT_DIRPATH = path.resolve(__dirname, "src");
 const BUILD_DIRPATH = path.resolve(__dirname, "src/public/javascripts/dist");
 
