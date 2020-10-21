@@ -19,6 +19,7 @@ export default () => {
     log(`fetching user...`);
     axios
       .get("/api/me")
+      .then((res) => res.data)
       .then((user) => {
         success(`found user ${user.mail}`);
         setUser(user);

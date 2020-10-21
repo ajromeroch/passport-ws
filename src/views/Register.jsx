@@ -7,7 +7,7 @@ import { useInput } from "../utils/custom-hooks";
 import { log, success, error } from "../utils/logs";
 
 export default () => {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const history = useHistory();
   const email = useInput("email");
   const password = useInput("password");
@@ -17,13 +17,11 @@ export default () => {
     log("register attempt...");
     try {
       // POST user credentials
-      const { data } = await axios.post("/api/register", {
+      await axios.post("/api/register", {
         email: email.value,
         password: password.value,
       });
-      // Set new state
-      setUser(data);
-      success(`new user ${user.email} registered`);
+      success(`new user registered`);
       // Redirect to login!
       history.push("/login");
     } catch ({ response }) {
