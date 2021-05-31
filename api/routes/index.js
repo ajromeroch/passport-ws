@@ -17,7 +17,22 @@ router.post("/register", async (req, res , next) => {
 })
 
 router.post("/login", passport.authenticate('local', {failureRedirect: '/login'}), (req, res, next) => {
-    res.send([req.body, req.user])
+    res.send(req.user)
+})
+
+router.post("/logout", (req, res , next) => {
+  req.logOut();
+  res.send();
+})
+
+router.get("/secret", (req, res, next) => {
+  if (req.user) res.send("cake.jpg")
+  res.sendStatus(401);
+})
+
+router.get("/me", (req, res ,next) => {
+    if(req.user) res.send(req.user);
+    res.sendStatus(401)
 })
 
 // Don´t modify this route, keep it at the bottom.
