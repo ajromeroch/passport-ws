@@ -1,8 +1,6 @@
 const S = require('sequelize')
 const db = require('../db');
 const bcrypt = require('bcrypt');
-const { useState } = require('react');
-const { use } = require('../routes');
 const saltRounds = 10;
 
 class User extends S.Model {}
