@@ -16,7 +16,11 @@ router.post("/register", async (req, res , next) => {
     }
 })
 
-router.post("/login", passport.authenticate('local', {failureRedirect: '/login'}), (req, res, next) => {
+// router.post("/login", passport.authenticate("'local', {failureRedirect: '/login'}"), (req, res, next) => {
+//     res.send(req.user)
+// })
+
+router.post("/login", passport.authenticate("facebook"), (req, res, next) => {
     res.send(req.user)
 })
 

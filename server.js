@@ -10,7 +10,8 @@ const db = require("./api/db");
 const session = require('express-session')
 const config = require("./server.config.js");
 const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy;
+// const LocalStrategy = require('passport-local').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('./api/Models/User')
 app.use(morgan("tiny"));
 app.use(helmet());
@@ -26,29 +27,49 @@ app.use(cookieParser())
 app.use(session({secret: 'bootcamp'}))
 app.use(passport.initialize())
 app.use(passport.session())
-passport.use(
-  new LocalStrategy(
-    {
-      usernameField: "email",
-      passwordField: "password",
-    },
-    function (email, password, done) {
-        User.findOne({where : { email: email }})
-        .then((user) => {
-          if (!user) {
-            return done(null, false); // user not found
-          }
-          user.hashCreator(password, user.salt).then((hash) => {
-            if (hash !== user.password) {
-              return done(null, false); // invalid password
-            }
-            done(null, user); // success :D
-          });
-        })
-        .catch(done);
-    }
-  )
-);
+
+// FACEBOOK
+
+passport.use(new FacebookStrategy({
+  clientID: '4243685519027344',
+  clientSecret: '24ca1bba5df2970c9591b2112585e584',
+  callbackURL: "http://localhost:8000/secret",
+  profileFields: ["email"]
+},
+function(accessToken, refreshToken, profile, done) {
+  User.findOrCreate({email: profile._json.email}, function(err, user) {
+    if (err) { return done(err); }
+    done(null, user);
+  });
+}
+));
+
+// LOCAL STRATEGY
+// passport.use(
+//   new LocalStrategy(
+//     {
+//       usernameField: "email",
+//       passwordField: "password",
+//     },
+//     function (email, password, done) {
+//         User.findOne({where : { email: email }})
+//         .then((user) => {
+//           if (!user) {
+//             return done(null, false); // user not found
+//           }
+//           user.hashCreator(password, user.salt).then((hash) => {
+//             if (hash !== user.password) {
+//               return done(null, false); // invalid password
+//             }
+//             done(null, user); // success :D
+//           });
+//         })
+//         .catch(done);
+//     }
+//   )
+// );
+
+
 passport.serializeUser(function(user, done) {
   done(null, user.id);
 });
